@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<!-- 注意事项：使用映射接口的配置方式，namespace必须指向接口的类全名 -->
+<mapper namespace="dao.StudentDao">
+
+    <!--
+    useGeneratedKeys:作用打开支持ID回填，设置为true
+    keyColumn：设置ID回填，ID是数据库中student表的主键字段名stu_id
+    keyProperty：设置ID回填到JavaBean对应的属性名
+    -->
+    <insert id="insert1" useGeneratedKeys="true" keyColumn="stu_id" keyProperty="stuId" >
+        INSERT INTO student (stu_name, stu_age) VALUES (#{stuName}, #{stuAge})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from student where stu_id=#{stuId}
+    </delete>
+    <update id="update" parameterType="entity.Student">
+        update student set stu_name=#{stuName}, stu_age=#{stuAge} where stu_id=#{stuId}
+    </update>
+    <select id="findAll" resultType="entity.Student">
+        select * from student
+    </select>
+
+</mapper>

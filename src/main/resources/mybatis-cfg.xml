@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="db.properties"></properties>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- 配置数据库连接 -->
+    <!--
+      environments:环境集，可以在里面配置多个environment，一个environment对应一个数据库连接
+      mybatis支持配置多个数据库连接，但是只能执行一个
+      default属性：作用就是指定默认执行的数据库连接environment标签的id属性
+     -->
+    <environments default="mysql">
+
+        <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 加载映射文件 -->
+    <mappers>
+        <!--指定单个的映射resource指定加载映射xml文件，resource=文件路径-->
+        <mapper resource="mappers/StudentMapper.xml"/>
+        <!--指定某个包的所有映射-->
+        <!--<package name=""/>-->
+    </mappers>
+
+</configuration>
